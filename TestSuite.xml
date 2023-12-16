@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite" verbose="2">
+    <test name="MyTest">
+        <classes>
+            <class name="com.juaracoding.CatatanKeuanganPemasukanTest"/>
+            <class name="com.juaracoding.CatatanKeuanganPengeluaranTest"/>
+        </classes>
+    </test>
+</suite>
