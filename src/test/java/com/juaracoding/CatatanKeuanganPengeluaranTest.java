@@ -38,8 +38,8 @@ public class CatatanKeuanganPengeluaranTest {
     @Test(priority = 2)
     public void transaksiPengeluaran() {
         delay(4);
-        MobileElement menuTransaksiPengeluaram = (MobileElement) driver.findElementById("com.chad.financialrecord:id/fabMenu");
-        menuTransaksiPengeluaram.click();
+        MobileElement menuTransaksiPengeluaran = (MobileElement) driver.findElementById("com.chad.financialrecord:id/fabMenu");
+        menuTransaksiPengeluaran.click();
         delay(4);
 
         //Menu Outcome
