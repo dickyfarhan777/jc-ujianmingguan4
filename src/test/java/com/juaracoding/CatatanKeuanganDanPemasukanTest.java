@@ -18,16 +18,22 @@ public class CatatanKeuanganDanPemasukanTest {
     public void setUp() throws MalformedURLException {
 
         DesiredCapabilities dc = new DesiredCapabilities();
-        dc.setCapability("deviceName", "3 API 30");
+        dc.setCapability("deviceName", "Pixel 2 API 30");
         dc.setCapability("udid", "emulator-5554");
         dc.setCapability("platformName", "android");
         dc.setCapability("platformVersion", "11");
         dc.setCapability("appPackage", "com.chad.financialrecord");
         dc.setCapability("appActivity", "com.rookie.catatankeuangan.feature.splash.SplashActivity");
-        dc.setCapability("noReset", true);
+        dc.setCapability("noReset", false);
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         driver = new AndroidDriver(url, dc);
         delay(5);
+    }
+
+    @AfterClass
+    public void finish() {
+        delay(3);
+        driver.quit();
     }
 
     @Test(priority = 1)
@@ -79,6 +85,9 @@ public class CatatanKeuanganDanPemasukanTest {
         keterangan.sendKeys("Bulan ini harus hemat, saving sekitar 5-6 juta");
         System.out.println(keterangan.getText());
         Assert.assertEquals(keterangan.getText(), "Bulan ini harus hemat, saving sekitar 5-6 juta");
+        MobileElement clickMenuKeterangan = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@text='Keterangan']");
+        clickMenuKeterangan.click();
+        delay(2);
 
         //ButtonSimpan
         MobileElement btnSaveIncome = (MobileElement) driver.findElementByXPath("//android.widget.Button[@resource-id='com.chad.financialrecord:id/btSave']");
@@ -120,19 +129,20 @@ public class CatatanKeuanganDanPemasukanTest {
         //Button Cattegory
         MobileElement menuCategory = (MobileElement) driver.findElementByXPath("//android.widget.Spinner[@resource-id='com.chad.financialrecord:id/spCategory']");
         menuCategory.click();
-        MobileElement clickCategory = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@resource-id='com.chad.financialrecord:id/tvName' and @text='Mobil']");
-        clickCategory.click();
+        delay(2);
+        MobileElement clickCategoryMenu = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@resource-id='com.chad.financialrecord:id/tvName' and @text='Mobil']");
+        clickCategoryMenu.click();
         delay(5);
         MobileElement resultCategory = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@resource-id='com.chad.financialrecord:id/tvName']");
         System.out.println(resultCategory.getText());
         Assert.assertEquals(resultCategory.getText(), "Mobil");
         delay(5);
 
-        MobileElement jumlah = (MobileElement) driver.findElementByXPath("//android.widget.EditText[@resource-id='com.chad.financialrecord:id/etAmount']");
-        jumlah.click();
-        jumlah.sendKeys("1.000.000");
-        System.out.println(jumlah.getText());
-        Assert.assertEquals(jumlah.getText(), "1.000.000");
+        MobileElement jumlahMenu = (MobileElement) driver.findElementByXPath("//android.widget.EditText[@resource-id='com.chad.financialrecord:id/etAmount']");
+        jumlahMenu.click();
+        jumlahMenu.sendKeys("1.000.000");
+        System.out.println(jumlahMenu.getText());
+        Assert.assertEquals(jumlahMenu.getText(), "1.000.000");
 
         //Fitur Note
         MobileElement menuPengeluaranKeterangan = (MobileElement) driver.findElementByXPath("//android.widget.EditText[@resource-id='com.chad.financialrecord:id/etNote']");
@@ -140,6 +150,8 @@ public class CatatanKeuanganDanPemasukanTest {
         menuPengeluaranKeterangan.sendKeys("Cicilan mobil ke 12 bulan");
         System.out.println(menuPengeluaranKeterangan.getText());
         Assert.assertEquals(menuPengeluaranKeterangan.getText(), "Cicilan mobil ke 12 bulan");
+        MobileElement clickMenuKeterangan = (MobileElement) driver.findElementByXPath("//android.widget.TextView[@text='Keterangan']");
+        clickMenuKeterangan.click();
 
         MobileElement btnSavePengeluaran = (MobileElement) driver.findElementByXPath("//android.widget.Button[@resource-id='com.chad.financialrecord:id/btSave']");
         delay(2);
@@ -151,12 +163,6 @@ public class CatatanKeuanganDanPemasukanTest {
         System.out.println("Finish Testing Transaksi Pengeluaran");
     }
 
-    @AfterClass
-    public void finish() {
-        delay(6);
-        driver.quit();
-    }
-
     public static void delay(long detik) {
         try {
             Thread.sleep(detik * 1000);
@@ -165,3 +171,4 @@ public class CatatanKeuanganDanPemasukanTest {
         }
     }
 }
+
